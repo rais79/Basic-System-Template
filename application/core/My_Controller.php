@@ -6,6 +6,8 @@ class My_Controller extends CI_Controller {
 	public $my_header_short = "<b>ST</b>";
 	public $pagetitle = "System Template";
 	public $my_template;
+	public $footer = "EPLI Online";
+	public $version = "1.0";
 	
 }
 

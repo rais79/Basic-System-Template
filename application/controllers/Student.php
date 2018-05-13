@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Student extends My_Public {
 	
+	var $dir = "Student";
 	var $navbar = "student/navbar";
 
 	function __construct()
@@ -20,14 +21,14 @@ class Student extends My_Public {
 	public function index()
 	{
 		$data['navbar'] = $this->navbar;
-		$data['content'] = "student/testcontent";
+		$data['content'] = $this->dir."/testcontent";
 		$this->load->view($this->my_template, $data);
 	}
 	
 	public function listlog()
 	{
 		$data['navbar'] = $this->navbar;
-		$data['content'] = "student/listlog";
+		$data['content'] = $this->dir."/listlog";
 		$data['list'] = $this->Logs->get_logs(array('studentid' => $this->session->userdata('logged_in')['userid']));
 		$this->load->view($this->my_template, $data);	
 	}
@@ -45,14 +46,14 @@ class Student extends My_Public {
 			$result = $this->Logs->insert($insert_data);
 			if($result):
 				$this->session->set_flashdata('error', 'success insert: id='.$result);
-				redirect('Student/log','refresh');
+				redirect($this->dir.'/log','refresh');
 			else:
 				$this->session->set_flashdata('error', 'Insert Fail');
-				redirect('Student/log','refresh');
+				redirect($this->dir.'/log','refresh');
 			endif;
 		endif;
 		$data['navbar'] = $this->navbar;
-		$data['content'] = "student/logli";
+		$data['content'] = $this->dir."/logli";
 		$this->load->view($this->my_template, $data);
 	}
 	
@@ -61,7 +62,7 @@ class Student extends My_Public {
 		$id = $this->uri->segment('3');
 		$this->Logs->delete($id);
 		$this->session->set_flashdata('error', 'Delete Success: id='.$id);
-		redirect('Student/listlog','refresh');
+		redirect($this->dir.'/listlog','refresh');
 	}
 	
 	public function editlog()
@@ -74,12 +75,12 @@ class Student extends My_Public {
 			$id = $this->input->post('id');
 			$this->Logs->update($id, $data);
 			$this->session->set_flashdata('error', 'Update Success');
-			redirect('Student/listlog','refresh');
+			redirect($this->dir.'/listlog','refresh');
 		endif;
 		$id = $this->uri->segment('3');
 		$data['list'] = $this->Logs->get_many($id);		
 		$data['navbar'] = $this->navbar;
-		$data['content'] = "student/editlogli";
+		$data['content'] = $this->dir."/editlogli";
 		$this->load->view($this->my_template, $data);
 	}	
 	

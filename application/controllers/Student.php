@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Student extends My_Public {
 	
-	var $dir = "Student";
+	var $dir = "student";
 	var $navbar = "student/navbar";
 
 	function __construct()
